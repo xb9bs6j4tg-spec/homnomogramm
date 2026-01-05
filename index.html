@@ -3,198 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Interactive Nomogram — Lymph Node Prediction</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Nomogram — Positive Lymph Node Probability</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main>
-    <h1>Interactive Nomogram — Positive Lymph Node Probability</h1>
-    <p class="subtitle">Based on multivariable logistic regression analysis</p>
+  <main class="container">
+    <h1>Positive lymph node probability in patients with prostate cancer</h1>
 
-    <section class="cols">
-      <div class="panel inputs">
-        <h2>1. Input Variables</h2>
-
-        <div class="inputGroup">
-          <label>Gleason Grade Group (MRI-fusion biopsy):</label>
-          <input id="gleason" type="number" min="1" max="5" step="1" value="3">
-        </div>
-
-        <div class="inputGroup">
-          <label>Preoperative PSA (ng/mL):</label>
-          <input id="psa" type="number" min="0" max="1000" step="0.01" value="10.00">
-        </div>
-
-        <div class="inputGroup">
-          <label>Maximum lesion diameter in mm:</label>
-          <input id="diam" type="number" min="0" max="200" step="0.1" value="12.0">
-        </div>
-
-        <hr/>
-
-        <h3>Regression Coefficients</h3>
-        <div class="coefficients">
-          <div class="coeffRow">
-            <label>Intercept (β₀):</label>
-            <input id="intercept" type="number" step="0.001" value="-9.079">
-          </div>
-          <div class="coeffRow">
-            <label>Gleason Grade Group (β₁):</label>
-            <input id="b_gleason" type="number" step="0.001" value="0.934">
-          </div>
-          <div class="coeffRow">
-            <label>PSA (β₂):</label>
-            <input id="b_psa" type="number" step="0.001" value="0.099">
-          </div>
-          <div class="coeffRow">
-            <label>Diameter (β₃):</label>
-            <input id="b_diam" type="number" step="0.001" value="0.131">
-          </div>
-        </div>
-
-        <button id="resetCoeffs">Restore default coefficients</button>
-
-        <div class="privacyControls">
-          <button id="downloadData">Daten herunterladen (JSON)</button>
-          <label for="uploadFile" class="uploadLabel">Daten hochladen (JSON)</label>
-          <input id="uploadFile" type="file" accept="application/json" style="display:none" />
-          <button id="clearData" class="danger">Daten löschen (nur lokal)</button>
-        </div>
-
-        <div class="note">
-          <strong>Formula:</strong> P(y=1) = 1 / (1 + e<sup>−(β₀ + β₁·x₁ + β₂·x₂ + β₃·x₃)</sup>)
-        </div>
+    <form id="nomogram-form" autocomplete="off" onsubmit="return false;">
+      <div class="field">
+        <label for="gleason">Gleason Grade Group (MRI-fusion biopsy):</label>
+        <input id="gleason" type="number" min="1" max="5" step="1" value="3">
       </div>
 
-      <div class="panel results">
-        <h2>2. Nomogram Visualization</h2>
+      <div class="field">
+        <label for="psa">Preoperative PSA (ng/mL):</label>
+        <input id="psa" type="number" min="0" max="1000" step="0.01" value="4.25">
+      </div>
 
-        <div id="nomogram">
-          <div class="nomRow">
-            <div class="nomLabel">Gleason Grade</div>
-            <div class="nomBar"><div class="nomFill" id="bar_gleason"></div></div>
-            <!doctype html>
-            <html lang="de">
-            <head>
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width,initial-scale=1" />
-              <title>Interactive Nomogram — Lymph Node Prediction</title>
-              <link rel="stylesheet" href="styles.css" />
-            </head>
-            <body>
-              <main>
-                <h1>Interactive Nomogram — Positive Lymph Node Probability</h1>
-                <p class="subtitle">Based on multivariable logistic regression analysis</p>
+      <div class="field">
+        <label for="diam">Maximum lesion diameter in mm:</label>
+        <input id="diam" type="number" min="0" step="0.1" value="10.0">
+      </div>
 
-                <section class="cols">
-                  <div class="panel inputs">
-                    <h2>1. Input Variables</h2>
+      <section class="results-section">
+        <h2>Positive lymph node probability</h2>
+        <div class="bar-container">
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar" id="progressBar" style="width: 27%;"></div>
+          </div>
+          <div class="probability-text" id="probText">27.0 %</div>
+        </div>
+      </section>
 
-                    <div class="inputGroup">
-                      <label>Gleason Grade Group (MRI-fusion biopsy):</label>
-                      <input id="gleason" type="number" min="1" max="5" step="1" value="3">
-                    </div>
+      <footer class="footer">
+        <p>
+          <a href="privacy.html">Datenschutzerklärung</a>
+        </p>
+      </footer>
+    </form>
+  </main>
 
-                    <div class="inputGroup">
-                      <label>Preoperative PSA (ng/mL):</label>
-                      <input id="psa" type="number" min="0" max="1000" step="0.01" value="10.00">
-                    </div>
-
-                    <div class="inputGroup">
-                      <label>Maximum lesion diameter in mm:</label>
-                      <input id="diam" type="number" min="0" max="200" step="0.1" value="12.0">
-                    </div>
-
-                    <hr/>
-
-                    <h3>Regression Coefficients</h3>
-                    <div class="coefficients">
-                      <div class="coeffRow">
-                        <label>Intercept (β₀):</label>
-                        <input id="intercept" type="number" step="0.001" value="-9.079">
-                      </div>
-                      <div class="coeffRow">
-                        <label>Gleason Grade Group (β₁):</label>
-                        <input id="b_gleason" type="number" step="0.001" value="0.934">
-                      </div>
-                      <div class="coeffRow">
-                        <label>PSA (β₂):</label>
-                        <input id="b_psa" type="number" step="0.001" value="0.099">
-                      </div>
-                      <div class="coeffRow">
-                        <label>Diameter (β₃):</label>
-                        <input id="b_diam" type="number" step="0.001" value="0.131">
-                      </div>
-                    </div>
-
-                    <button id="resetCoeffs">Restore default coefficients</button>
-
-                    <div class="privacyControls">
-                      <button id="downloadData">Daten herunterladen (JSON)</button>
-                      <label for="uploadFile" class="uploadLabel">Daten hochladen (JSON)</label>
-                      <input id="uploadFile" type="file" accept="application/json" style="display:none" />
-                      <button id="clearData" class="danger">Daten löschen (nur lokal)</button>
-                    </div>
-
-                    <div class="note">
-                      <strong>Formula:</strong> P(y=1) = 1 / (1 + e<sup>−(β₀ + β₁·x₁ + β₂·x₂ + β₃·x₃)</sup>)
-                    </div>
-                  </div>
-
-                  <div class="panel results">
-                    <h2>2. Nomogram Visualization</h2>
-
-                    <div id="nomogram">
-                      <div class="nomRow">
-                        <div class="nomLabel">Gleason Grade</div>
-                        <div class="nomBar"><div class="nomFill" id="bar_gleason"></div></div>
-                        <div class="nomScore" id="points_gleason">0</div>
-                      </div>
-
-                      <div class="nomRow">
-                        <div class="nomLabel">PSA (ng/mL)</div>
-                        <div class="nomBar"><div class="nomFill" id="bar_psa"></div></div>
-                        <div class="nomScore" id="points_psa">0</div>
-                      </div>
-
-                      <div class="nomRow">
-                        <div class="nomLabel">Diameter (mm)</div>
-                        <div class="nomBar"><div class="nomFill" id="bar_diam"></div></div>
-                        <div class="nomScore" id="points_diam">0</div>
-                      </div>
-
-                      <hr class="nomHr"/>
-
-                      <div class="nomRow total">
-                        <div class="nomLabel">Total Score</div>
-                        <div class="nomBar"><div class="nomFill" id="bar_total"></div></div>
-                        <div class="nomScore" id="points_total">0.00</div>
-                      </div>
-                    </div>
-
-                    <h2>3. Predicted Probability</h2>
-                    <div class="probBox">
-                      <div class="probValue" id="probPct">0.0%</div>
-                      <div class="probBar">
-                        <div class="probFill" id="probFill"></div>
-                      </div>
-                      <div class="probDetail">
-                        <span>Logit = </span><span id="logitVal">0.00</span>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section class="footer">
-                  <p><strong>Instructions:</strong> Adjust the inputs to change values. The nomogram and probability update in real-time. You can also modify the regression coefficients if needed.</p>
-                  <p><small>Based on multivariable logistic regression analysis for predicting positive lymph node status in prostate cancer patients.</small></p>
-
-                  <h3>Datenschutz / Privacy</h3>
-                  <p>Diese Anwendung läuft vollständig im Browser. Es werden keine Daten an externe Server, Analytics- oder Tracking-Dienste gesendet. Alle Werte bleiben lokal auf Ihrem Gerät (im Browser-Speicher), es sei denn, Sie laden sie manuell als Datei herunter oder laden eine Datei hoch. Die Anwendung sendet keine Daten automatisch.</p>
-                  <p><strong>Wichtiger Hinweis:</strong> Verwenden Sie "Daten herunterladen", um eine lokale Kopie Ihrer Eingaben als JSON-Datei zu speichern; mit "Daten hochladen" können Sie eine solche JSON-Datei wieder einlesen. "Daten löschen" entfernt alle lokal gespeicherten Werte im Browser. Stellen Sie beim Betrieb auf einem Server sicher, dass der Server DSGVO-konform betrieben wird.</p>
-                </section>
-              </main>
-
-              <script src="app.js"></script>
-            </body>
-            </html>
+  <script src="app.js"></script>
+</body>
+</html>
