@@ -13,7 +13,7 @@ function logisticProbability(constant, terms) {
 }
 
 // Nomogram 1 coefficients (SPSS final step)
-const NOMO1 = { constant: -9.079, bGleason: 0.934, bPsa: 0.099, bDiam: 0.131 };
+const NOMO1 = { constant: -7.325, bGleason: 0.934, bPsa: 0.099, bDiam: 0.131 };
 
 // Nomogram 2 coefficients (SPSS final step)
 const NOMO2 = { constant: -4.346, bPosStanzen: 0.029, bGleasonBiopsy: 0.538 };
