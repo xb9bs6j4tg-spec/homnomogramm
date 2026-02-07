@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculation explanation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Calculation explanation</h1>
+
+    <section class="abstract">
+      <p><strong>How the probabilities are calculated</strong></p>
+
+      <p>All probability calculations are performed locally within the application without rounding or intermediate formatting in order to reproduce the original SPSS equations as accurately as possible. Minor deviations may occur solely due to internal numerical precision differences within SPSS that are not externally visible.</p>
+
+      <p>The predicted probabilities were calculated using the logistic regression formula<br>
+      <code>p = 1 / (1 + exp(−logit))</code> with the corresponding regression coefficients derived from SPSS.</p>
+
+      <p>The calculated probabilities are provided for informational purposes only. No responsibility is assumed for the use or interpretation of these estimates. The results are intended to illustrate possible risk scenarios and to support, but not replace, individualized clinical decision-making regarding the performance or omission of lymphadenectomy. All probability estimates should be interpreted in the context of comprehensive patient-specific clinical information and professional medical judgment.</p>
+    </section>
+
+    <p><a href="index.html">Back</a></p>
+  </main>
+</body>
+</html>

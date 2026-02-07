@@ -13,39 +13,83 @@
       <p>Two SPSS-based nomograms side-by-side. Calculations follow the SPSS coefficients exactly.</p>
     </header>
 
-    <main class="two-columns">
-      <section class="nomogram" id="nomogram-1">
-        <h2>Positive lymph node probability in patients with prostate cancer - Patients with MRI</h2>
-        <div class="form-group">
-          <label>Gleason grade group (numeric): <input id="g1" type="number" step="1" value="3"></label>
-        </div>
-        <div class="form-group">
-          <label>preoperative PSA [ng/ml]: <input id="psa1" type="number" step="0.01" value="7.20"></label>
-        </div>
-        <div class="form-group">
-          <label>maximum lesion diameter [mm]: <input id="diam1" type="number" step="0.1" value="12.5"></label>
-        </div>
-        <div class="actions">
-          <button id="calc1">Calculate</button>
-        </div>
-        <div class="result" id="result1">Result: —</div>
-        <pre class="breakdown" id="break1"></pre>
+    <main class="container">
+      <h1>Positive lymph node probability in patients with prostate cancer</h1>
+
+      <section class="abstract">
+        <p><strong>The following section provides an abstract of the scientific work on which the development models are based:</strong></p>
+
+        <p><strong>1. Background and Objectives</strong><br>
+        Nomograms can help to avoid unnecessary pelvic lymphadenectomies in prostate cancer. The aim was to validate established nomograms (MSKCC, Briganti 2012/2018), determine optimal cut-offs, and develop simplified models of our own.</p>
+
+        <p><strong>2. Material and Methods</strong><br>
+        A retrospective analysis was conducted on 1000 patients who underwent radical prostatectomy with extended pelvic lymph node dissection. Preoperative risk estimates derived from established nomograms were compared with histopathological lymph node findings, which informed the development of novel predictive models based on a limited set of variables.</p>
+
+        <p><strong>3. Key Findings</strong><br>
+        Lymph node metastases were identified in 13.2% of patients. At a risk threshold of 7.5%, all evaluated nomograms demonstrated comparable discriminatory performance, with AUCs ranging from approximately 0.707 to 0.744. Using this cut-off, up to 65.8% of pelvic lymph node dissections could have been avoided while maintaining low false-negative rates between 1.5% and 2.1%. The newly developed models yielded similar performance, with particularly high rates of avoided dissections.</p>
+
+        <p><strong>4. Conclusion</strong><br>
+        We identified 7.5% as the optimal cut-off in our cohort concerning the avoidance of a high percentage of ePLNDs without missing many LNI cases. Both established and newly developed nomograms showed similar performance as the established nomograms while needing a much lower number of parameters hence being more suitable for daily clinical use.</p>
       </section>
 
-      <section class="nomogram" id="nomogram-2">
-        <h2>Positive lymph node probability in patients with prostate cancer - No MRI needed</h2>
-        <div class="form-group">
-          <label>Anteil positiver Stanzen in der Biopsie [%]: <input id="pos2" type="number" step="0.1" value="10.0"></label>
+      <section class="two-columns">
+        <div class="column">
+          <form id="nomogram-form-1" autocomplete="off" onsubmit="return false;">
+            <div class="field">
+              <label for="gleason1">Gleason Grade Group (MRI-fusion biopsy):</label>
+              <input id="gleason1" type="number" min="1" max="5" step="1" value="3">
+            </div>
+
+            <div class="field">
+              <label for="psa1">Preoperative PSA (ng/mL):</label>
+              <input id="psa1" type="number" min="0" max="1000" step="0.01" value="4.25">
+            </div>
+
+            <div class="field">
+              <label for="diam1">Maximum lesion diameter in mm:</label>
+              <input id="diam1" type="number" min="0" step="0.1" value="10.0">
+            </div>
+
+            <section class="results-section">
+              <h2>Positive lymph node probability - Patients with MRI</h2>
+              <div class="bar-container">
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar" id="progressBar1" style="width: 0%;"></div>
+                </div>
+                <div class="probability-text" id="probText1">— %</div>
+              </div>
+            </section>
+          </form>
         </div>
-        <div class="form-group">
-          <label>präoperativer Gleason-Score (numeric): <input id="g2" type="number" step="1" value="3"></label>
+
+        <div class="column">
+          <form id="nomogram-form-2" autocomplete="off" onsubmit="return false;">
+            <div class="field">
+              <label for="pos2">Anteil positiver Stanzen in der Biopsie [%]:</label>
+              <input id="pos2" type="number" min="0" max="100" step="0.1" value="10.0">
+            </div>
+            <div class="field">
+              <label for="g2">präoperativer Gleason-Score:</label>
+              <input id="g2" type="number" min="1" max="5" step="1" value="3">
+            </div>
+
+            <section class="results-section">
+              <h2>Positive lymph node probability - No MRI needed</h2>
+              <div class="bar-container">
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar" id="progressBar2" style="width: 0%;"></div>
+                </div>
+                <div class="probability-text" id="probText2">— %</div>
+              </div>
+            </section>
+          </form>
         </div>
-        <div class="actions">
-          <button id="calc2">Calculate</button>
-        </div>
-        <div class="result" id="result2">Result: —</div>
-        <pre class="breakdown" id="break2"></pre>
       </section>
+
+      <footer class="footer">
+        <p><a href="privacy.html">Datenschutzerklärung</a> • <a href="calculation.html">Calculation explanation</a></p>
+        <p>Impressum: celinemeiers@gmx.net</p>
+      </footer>
     </main>
 
     <footer>
