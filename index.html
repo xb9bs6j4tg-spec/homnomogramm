@@ -10,8 +10,8 @@
   <div class="container">
     <header>
       <h1>homnomogramm</h1>
-      <p>Two SPSS-based nomograms side-by-side. Calculations follow the SPSS coefficients exactly.</p>
     </header>
+    <p>Two SPSS-based nomograms side-by-side. Calculations follow the SPSS coefficients exactly.</p>
 
     <main class="container">
       <h1>Positive lymph node probability in patients with prostate cancer</h1>
@@ -34,6 +34,7 @@
 
       <section class="two-columns">
         <div class="column">
+          <h2>Patients with MRI</h2>
           <form id="nomogram-form-1" autocomplete="off" onsubmit="return false;">
             <div class="field">
               <label for="gleason1">Gleason Grade Group (MRI-fusion biopsy):</label>
@@ -63,6 +64,7 @@
         </div>
 
         <div class="column">
+          <h2>No MRI needed</h2>
           <form id="nomogram-form-2" autocomplete="off" onsubmit="return false;">
             <div class="field">
               <label for="pos2">Anteil positiver Stanzen in der Biopsie [%]:</label>
@@ -87,14 +89,10 @@
       </section>
 
       <footer class="footer">
-        <p><a href="privacy.html">Datenschutzerklärung</a> • <a href="calculation.html">Calculation explanation</a></p>
+        <p><a href="privacy.html">Privacy policy</a> • <a href="calculation.html">Calculation explanation</a></p>
         <p>Impressum: celinemeiers@gmx.net</p>
       </footer>
     </main>
-
-    <footer>
-      <p>Note: All computations use the exact SPSS coefficients and the formula p = 1 / (1 + exp(-logit)). See code comments in <code>app.js</code>.</p>
-    </footer>
   </div>
 
   <script src="app.js"></script>
