@@ -12,8 +12,13 @@ function logisticProbability(constant, terms) {
   return { logit: logit, p: p };
 }
 
-// Nomogram 1 coefficients (SPSS final step)
-const NOMO1 = { constant: -7.325, bGleason: 0.934, bPsa: 0.099, bDiam: 0.131 };
+// Nomogram 1 coefficients (SPSS Step 1 values provided)
+// From SPSS Step 1 table (attached):
+// Gleason Grade group: B = 0.522
+// PSA bei Erstdiagnose [ng/ml]: B = -0.006
+// maximale Ausdehnung [mm]: B = 0.098
+// Konstante: -5.474
+const NOMO1 = { constant: -5.474, bGleason: 0.522, bPsa: -0.006, bDiam: 0.098 };
 
 // Nomogram 2 coefficients (SPSS final step)
 const NOMO2 = { constant: -4.346, bPosStanzen: 0.029, bGleasonBiopsy: 0.538 };
